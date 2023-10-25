@@ -19,29 +19,35 @@ public class LogicScript : MonoBehaviour
     private bool ScoreSound_Toggle;
 
     public BirdScript Bird;
+    private SoundScript SoundScript;
 
     //TODO: place player pref logic in seperate file
     private const string Highscore = "Highscore";
 
+    private void Awake()
+    {
+        Bird = GameObject.FindGameObjectWithTag("Player").GetComponent<BirdScript>();
+        SoundScript = GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundScript>();
+    }
+
     void Start()
     {
-        ToggleSoundOn(ref GameOverSound_Toggle);
-        ToggleSoundOn(ref ScoreSound_Toggle);
+        SoundScript.ToggleSoundOn(ref GameOverSound_Toggle);
+        SoundScript.ToggleSoundOn(ref ScoreSound_Toggle);
 
         PlayerScore = 0;
         DisplayHighscore();
 
-        Bird = GameObject.FindGameObjectWithTag("Player").GetComponent<BirdScript>();
     }
 
     [ContextMenu("Increase Player Score")]
     public void AddScore(int scoreToAdd = 1)
     {
-        ToggleSoundOn(ref ScoreSound_Toggle);
+        SoundScript.ToggleSoundOn(ref ScoreSound_Toggle);
        
         if (Bird.IsAlive)
         {
-            PlaySound(ScoreSound, ref ScoreSound_Toggle);
+            SoundScript.PlaySound(ScoreSound, ref ScoreSound_Toggle);
             PlayerScore += scoreToAdd;
             ScoreTextField.text = PlayerScore.ToString();
         }
@@ -54,30 +60,12 @@ public class LogicScript : MonoBehaviour
 
     public void GameOver()
     {
-        PlaySound(GameOverSound, ref GameOverSound_Toggle);
+        SoundScript.PlaySound(GameOverSound, ref GameOverSound_Toggle);
+        
         SaveHighscore(PlayerScore);
         DisplayHighscore();
+        
         GameOverScreen.SetActive(true);
-    }
-
-    //TODO: place sound scripts in seperate file
-    private void PlaySound(AudioSource audio, ref bool soundToggle)
-    {
-        if (soundToggle)
-        {
-            audio.Play();
-            ToggleSoundOff(ref soundToggle);
-        }
-    }
-
-    private void ToggleSoundOff(ref bool soundToggle)
-    {
-        soundToggle = false;
-    }
-
-    private void ToggleSoundOn(ref bool soundToggle)
-    {
-        soundToggle = true;
     }
 
     //TODO: place player pref logic in seperate file
