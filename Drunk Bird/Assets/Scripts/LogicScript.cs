@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public class LogicScript : MonoBehaviour
 {
     public int PlayerScore { get; private set; }
-    public Text ScoreText;
+    public Text ScoreTextField;
+    public Text HighscoreTextField;
     
     public GameObject GameOverScreen;
 
@@ -19,12 +20,16 @@ public class LogicScript : MonoBehaviour
 
     public BirdScript Bird;
 
+    //TODO: place player pref logic in seperate file
+    private const string Highscore = "Highscore";
+
     void Start()
     {
         ToggleSoundOn(ref GameOverSound_Toggle);
         ToggleSoundOn(ref ScoreSound_Toggle);
 
         PlayerScore = 0;
+        DisplayHighscore();
 
         Bird = GameObject.FindGameObjectWithTag("Player").GetComponent<BirdScript>();
     }
@@ -32,14 +37,13 @@ public class LogicScript : MonoBehaviour
     [ContextMenu("Increase Player Score")]
     public void AddScore(int scoreToAdd = 1)
     {
-        Debug.Log("Add Score triggerd");
         ToggleSoundOn(ref ScoreSound_Toggle);
        
         if (Bird.IsAlive)
         {
             PlaySound(ScoreSound, ref ScoreSound_Toggle);
             PlayerScore += scoreToAdd;
-            ScoreText.text = PlayerScore.ToString();
+            ScoreTextField.text = PlayerScore.ToString();
         }
     }
 
@@ -51,9 +55,12 @@ public class LogicScript : MonoBehaviour
     public void GameOver()
     {
         PlaySound(GameOverSound, ref GameOverSound_Toggle);
+        SaveHighscore(PlayerScore);
+        DisplayHighscore();
         GameOverScreen.SetActive(true);
     }
 
+    //TODO: place sound scripts in seperate file
     private void PlaySound(AudioSource audio, ref bool soundToggle)
     {
         if (soundToggle)
@@ -71,5 +78,22 @@ public class LogicScript : MonoBehaviour
     private void ToggleSoundOn(ref bool soundToggle)
     {
         soundToggle = true;
+    }
+
+    //TODO: place player pref logic in seperate file
+    private void SaveHighscore(int score)
+    {
+        if (score > LoadHighScore())
+        PlayerPrefs.SetInt(Highscore, score);
+    }
+
+    private int LoadHighScore()
+    {
+        return PlayerPrefs.GetInt(Highscore);
+    }
+
+    private void DisplayHighscore()
+    {
+        HighscoreTextField.text = $"{Highscore}: {LoadHighScore()}";
     }
 }
