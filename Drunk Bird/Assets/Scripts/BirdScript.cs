@@ -5,9 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class BirdScript : MonoBehaviour
-{
-    [SerializeField] InputActionReference jumpInput;
-    
+{    
     public Rigidbody2D rigidBody;
     public float velocityStrength;
 
@@ -17,11 +15,6 @@ public class BirdScript : MonoBehaviour
 
     private const float UpperGameBoundry = 17f;
     private const float LowerGameBoundry = -17f;
-
-    private void Awake()
-    {
-        jumpInput.action.performed += OnJump;
-    }
 
 
     void Start()
@@ -33,18 +26,6 @@ public class BirdScript : MonoBehaviour
     void Update()
     {
         CheckOutOfBounds();
-    }
-
-    private void OnDestroy()
-    {
-        jumpInput.action.performed -= OnJump;
-
-    }
-
-    private void OnJump(InputAction.CallbackContext context)
-    {
-        if (IsAlive)
-            rigidBody.velocity = Vector2.up * velocityStrength;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
