@@ -537,11 +537,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80448b2947e7e7428e08e74f5473758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScoreText: {fileID: 30961671}
+  ScoreTextField: {fileID: 30961671}
+  HighscoreTextField: {fileID: 347937472}
   GameOverScreen: {fileID: 1159173179}
   GameOverSound: {fileID: 675168416}
   ScoreSound: {fileID: 675168417}
-  Bird: {fileID: 1017227958}
+  Bird: {fileID: 2819480829714086350}
 --- !u!4 &675168415
 Transform:
   m_ObjectHideFlags: 0
@@ -896,11 +897,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1017227958 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2819480829921596283, guid: b3533528007351647a0b41ebb5ef16d8, type: 3}
-  m_PrefabInstance: {fileID: 2819480829714086349}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1017227963 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2819480829921596276, guid: b3533528007351647a0b41ebb5ef16d8, type: 3}
@@ -6119,6 +6115,17 @@ PrefabInstance:
       addedObject: {fileID: 1429662264}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3533528007351647a0b41ebb5ef16d8, type: 3}
+--- !u!114 &2819480829714086350 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2819480829921596279, guid: b3533528007351647a0b41ebb5ef16d8, type: 3}
+  m_PrefabInstance: {fileID: 2819480829714086349}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c6897076fe8e354d8eb55b1ea8104e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
