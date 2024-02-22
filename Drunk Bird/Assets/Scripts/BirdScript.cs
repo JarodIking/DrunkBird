@@ -30,7 +30,8 @@ public class BirdScript : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        Debug.Log("Jumping");
+        if (IsAlive)
+            rigidBody.velocity = Vector2.up * velocityStrength;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
