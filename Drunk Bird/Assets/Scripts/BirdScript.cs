@@ -28,6 +28,11 @@ public class BirdScript : MonoBehaviour
         CheckOutOfBounds();
     }
 
+    public void Jump(InputAction.CallbackContext context)
+    {
+        Debug.Log("Jumping");
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameOver();
