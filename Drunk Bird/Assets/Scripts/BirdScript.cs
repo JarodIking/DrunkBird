@@ -25,7 +25,6 @@ public class BirdScript : MonoBehaviour
     void Update()
     {
         CheckOutOfBounds();
-        PlayerMovement();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -45,12 +44,6 @@ public class BirdScript : MonoBehaviour
                 GameOver();
                 break;
         }
-    }
-    
-    private void PlayerMovement()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && IsAlive)
-            rigidBody.velocity = Vector2.up * velocityStrength;
     }
 
     private void GameOver()
