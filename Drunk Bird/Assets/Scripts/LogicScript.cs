@@ -55,6 +55,7 @@ public class LogicScript : MonoBehaviour
 
     public void Restart()
     {
+        Debug.Log("restart");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
