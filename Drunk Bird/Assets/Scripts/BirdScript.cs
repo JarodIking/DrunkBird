@@ -9,26 +9,14 @@ public class BirdScript : MonoBehaviour
 {    
     public Rigidbody2D RigidBody;
     public float VelocityStrength;
-    public InputAction PlayerControls;
 
 
     private LogicScript logic;
-    private Vector2 moveDirection;
 
     public bool IsAlive { get; private set; }
 
     private const float UpperGameBoundry = 17f;
     private const float LowerGameBoundry = -17f;
-
-    private void OnEnable()
-    {
-        PlayerControls.Enable();    
-    }
-
-    private void OnDisable()
-    {
-        PlayerControls.Disable();
-    }
 
     void Start()
     {
@@ -39,13 +27,14 @@ public class BirdScript : MonoBehaviour
     void Update()
     {
         CheckOutOfBounds();
-
-        moveDirection = PlayerControls.ReadValue<Vector2>();
-        if (IsAlive)
-            RigidBody.velocity = new Vector2(moveDirection.x * VelocityStrength, moveDirection.y * VelocityStrength);
-
     }
 
+    public void Jump(InputAction.CallbackContext context)
+    {
+        if (IsAlive)
+            RigidBody.velocity = Vector2.up * VelocityStrength;
+    }
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameOver();
