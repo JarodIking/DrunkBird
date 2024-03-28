@@ -41,14 +41,10 @@ public class BirdScript : MonoBehaviour
         CheckOutOfBounds();
 
         moveDirection = PlayerControls.ReadValue<Vector2>();
-    }
-
-    private void FixedUpdate()
-    {
         if (IsAlive)
             RigidBody.velocity = new Vector2(moveDirection.x * VelocityStrength, moveDirection.y * VelocityStrength);
-    }
 
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
