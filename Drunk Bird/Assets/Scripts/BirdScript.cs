@@ -28,6 +28,12 @@ public class BirdScript : MonoBehaviour
         CheckOutOfBounds();
     }
 
+    public void Jump(InputAction.CallbackContext context)
+    {
+        if (IsAlive)
+            rigidBody.velocity = Vector2.up * velocityStrength;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameOver();
