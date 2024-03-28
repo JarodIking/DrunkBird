@@ -1,5 +1,5 @@
 {
-    "name": "InputAssests",
+    "name": "PlayerActions",
     "maps": [
         {
             "name": "Gameplay",
@@ -20,7 +20,7 @@
                     "name": "",
                     "id": "31fd2243-3aca-40f9-8cc8-8fbdfcf8df06",
                     "path": "<Keyboard>/space",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Jump",

@@ -8,6 +8,7 @@ public class BirdScript : MonoBehaviour
 {    
     public Rigidbody2D rigidBody;
     public float velocityStrength;
+    public InputAction PlayerControls;
 
     private LogicScript Logic;
     
@@ -16,6 +17,15 @@ public class BirdScript : MonoBehaviour
     private const float UpperGameBoundry = 17f;
     private const float LowerGameBoundry = -17f;
 
+    private void OnEnable()
+    {
+        PlayerControls.Enable();    
+    }
+
+    private void OnDisable()
+    {
+        PlayerControls.Disable();
+    }
 
     void Start()
     {
