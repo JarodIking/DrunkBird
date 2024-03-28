@@ -7,10 +7,6 @@ using UnityEngine.InputSystem;
 
 public class BirdScript : MonoBehaviour
 {    
-    public Rigidbody2D RigidBody;
-    public float VelocityStrength;
-
-
     private LogicScript logic;
 
     public bool IsAlive { get; private set; }
@@ -27,12 +23,6 @@ public class BirdScript : MonoBehaviour
     void Update()
     {
         CheckOutOfBounds();
-    }
-
-    public void Jump(InputAction.CallbackContext context)
-    {
-        if (IsAlive)
-            RigidBody.velocity = Vector2.up * VelocityStrength;
     }
     
     private void OnCollisionEnter2D(Collision2D collision)
