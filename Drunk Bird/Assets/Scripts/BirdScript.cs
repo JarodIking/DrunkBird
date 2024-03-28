@@ -2,16 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class BirdScript : MonoBehaviour
 {    
-    public Rigidbody2D rigidBody;
-    public float velocityStrength;
+    public Rigidbody2D RigidBody;
+    public float VelocityStrength;
     public InputAction PlayerControls;
 
-    private LogicScript Logic;
-    
+
+    private LogicScript logic;
+    private Vector2 moveDirection;
+
     public bool IsAlive { get; private set; }
 
     private const float UpperGameBoundry = 17f;
@@ -29,14 +32,23 @@ public class BirdScript : MonoBehaviour
 
     void Start()
     {
-        Logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
+        logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
         SetAlive();
     }
 
     void Update()
     {
         CheckOutOfBounds();
+
+        moveDirection = PlayerControls.ReadValue<Vector2>();
     }
+
+    private void FixedUpdate()
+    {
+        if (IsAlive)
+            RigidBody.velocity = new Vector2(moveDirection.x * VelocityStrength, moveDirection.y * VelocityStrength);
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -60,7 +72,7 @@ public class BirdScript : MonoBehaviour
     private void GameOver()
     {
         SetDead();
-        Logic.GameOver();
+        logic.GameOver();
     }
 
     private void SetAlive()
